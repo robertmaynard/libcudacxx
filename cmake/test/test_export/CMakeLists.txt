@@ -4,8 +4,19 @@ project(libcudacxxTestExport CXX)
 message(STATUS "libcudacxx_DIR=${libcudacxx_DIR}")
 find_package(libcudacxx REQUIRED)
 
-add_executable(version_check version_check.cxx)
-target_link_libraries(version_check PRIVATE libcudacxx::libcudacxx)
+add_library(version_check_objs OBJECT version_check.cxx)
+target_link_libraries(version_check_objs PUBLIC libcudacxx::libcudacxx)
+
+add_executable(version_check)
+target_link_libraries(version_check PRIVATE version_check_objs)
+
+# Install tree exporting of version_check_objs
+install(TARGETS version_check_objs EXPORT test-targets)
+install(EXPORT test-targets FILE test-targets.cmake DESTINATION "lib/cmake/libcudacxx-test/")
+
+# Build tree exporting of version_check_objs
+export(EXPORT test-targets FILE "${CMAKE_CURRENT_BINARY_DIR}/libcudacxx-test/test-targets.cmake")
+
 enable_testing()
 add_test(NAME version_check COMMAND "$<TARGET_FILE:version_check>")
 set_property(TEST version_check PROPERTY

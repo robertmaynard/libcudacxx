@@ -23,7 +23,9 @@ function(_libcudacxx_declare_interface_alias alias_name ugly_name)
   #    configure it, and then ALIAS it into the namespace (or ALIAS and then
   #    configure, that seems to work too).
   add_library(${ugly_name} INTERFACE)
-  add_library(${alias_name} ALIAS ${ugly_name})
+
+  add_library(${alias_name} INTERFACE IMPORTED GLOBAL)
+  target_link_libraries(${alias_name} INTERFACE  ${ugly_name})
 endfunction()
 
 #
