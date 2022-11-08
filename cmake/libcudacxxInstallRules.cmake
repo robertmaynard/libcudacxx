@@ -12,9 +12,11 @@ include(GNUInstallDirs)
 # Libcudacxx headers
 install(DIRECTORY "${libcudacxx_SOURCE_DIR}/include/cuda"
   DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+  PATTERN CMakeLists.txt EXCLUDE
 )
 install(DIRECTORY "${libcudacxx_SOURCE_DIR}/include/nv"
   DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+  PATTERN CMakeLists.txt EXCLUDE
 )
 
 # Libcudacxx cmake package
