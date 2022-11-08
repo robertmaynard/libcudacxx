@@ -1,5 +1,5 @@
 option(libcudacxx_ENABLE_INSTALL_RULES
-  "Enable installation of libcudacxx" ${libcudacxx_TOPLEVEL_PROJECT}
+  "Enable installation of libcudacxx" ${LIBCUDACXX_TOPLEVEL_PROJECT}
 )
 
 if (NOT libcudacxx_ENABLE_INSTALL_RULES)
